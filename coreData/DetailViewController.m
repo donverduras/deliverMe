@@ -21,6 +21,7 @@
 @synthesize idPaquete = _idPaquete;
 @synthesize editando;
 @synthesize delegado;
+@synthesize vistaMapa;
 
 - (void)dealloc
 {
@@ -52,12 +53,14 @@
         EntidadDatos *objeto = (EntidadDatos *) self.detailItem;
         self.nombre.text = [objeto nombre];
         self.fecha.text = [objeto.timeStamp description];
+        self.idPaquete.text = [objeto idPaquete];
         self.editando = YES;
     } 
     else
     {
         self.nombre.text = @"";
         self.fecha.text = [[NSDate date] description];
+        self.idPaquete.text = @"";
         self.editando = NO;
     }
 }
@@ -125,26 +128,23 @@
 - (IBAction)oprimioBoton:(id)sender {
     if(editando){
         [self.delegado modifyObject: self.nombre.text conFecha: [NSDate date] conID: self.idPaquete.text];
+        [self.navigationController popViewControllerAnimated:YES];
     }
     else
     {
         [self.delegado insertNewObject: self.nombre.text conFecha: [NSDate date] conID: self.idPaquete.text];
+        [self.navigationController popViewControllerAnimated:YES];
         editando = YES;
     }
 }
 
 - (IBAction)oprimioMapa:(id)sender {
     if(!self.vistaMapa){
-        self.vistaMapa = [[[VistaMapa alloc] initWithNibName:@"VistaMapa" bundle:nil] autorelease];
+        self.vistaMapa = [[[Mapa alloc] initWithNibName:@"Mapa" bundle:nil] autorelease];
     }
     
-    [self.vistaMapa setDelegado:self];
-    
     [self.vistaMapa setModalTransitionStyle:UIModalTransitionStylePartialCurl];
-    [self presentViewController:_vistaMapa animated:YES completion: NULL];
+    [self.navigationController pushViewController:self.vistaMapa animated:YES];
 }
 
-- (void) quitaVista:(id)sender{
-    [self dismissViewControllerAnimated:YES completion:NULL];
-}
 @end

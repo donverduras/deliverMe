@@ -18,6 +18,7 @@
 @synthesize managedObjectModel = __managedObjectModel;
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
 @synthesize navigationController = _navigationController;
+@synthesize ubicacionActual;
 
 - (void)dealloc
 {
@@ -41,6 +42,8 @@
                   newLocation.coordinate.latitude,
                   newLocation.coordinate.longitude);
             NSLog(@"Precision horizontal:%f", newLocation.horizontalAccuracy);
+            ubicacionActual.latitude = newLocation.coordinate.latitude;
+            ubicacionActual.longitude = newLocation.coordinate.longitude;
             
             //Se deja de actualizar la localizacion para ahorrar bateria
             //[manager stopUpdatingLocation];

@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "MasterViewController.h"
-#import "VistaMapa.h"
+#import "Mapa.h"
 
-@interface DetailViewController : UIViewController<quitaVistaDelegado>
+@interface DetailViewController : UIViewController
 
 @property (strong, nonatomic) id detailItem;
 @property (retain, nonatomic) MasterViewController *delegado;
@@ -23,6 +23,6 @@
 - (IBAction)oprimioBoton:(id)sender;
 - (IBAction)oprimioMapa:(id)sender;
 
-@property (nonatomic, retain) VistaMapa *vistaMapa;
+@property (nonatomic, retain) Mapa *vistaMapa;
 
 @end

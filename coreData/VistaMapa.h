@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 
 @protocol quitaVistaDelegado
 
@@ -14,8 +15,12 @@
 
 @end
 
-@interface VistaMapa : UIViewController
+@interface VistaMapa : UIViewController <MKMapViewDelegate>{
+    MKMapView *mapView;
+}
 
 @property (nonatomic, retain) id <quitaVistaDelegado> delegado;
+
+@property (nonatomic, retain) IBOutlet MKMapView *mapView;
 
 @end

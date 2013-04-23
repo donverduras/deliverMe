@@ -13,6 +13,7 @@
 @implementation AppDelegate
 
 @synthesize window = _window;
+@synthesize locationManager= _locationManager;
 @synthesize managedObjectContext = __managedObjectContext;
 @synthesize managedObjectModel = __managedObjectModel;
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
@@ -28,11 +29,46 @@
     [super dealloc];
 }
 
+-(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
+    NSDate* eventDate = newLocation.timestamp;
+    NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
+    if (abs(howRecent) < 60.0)
+    {
+        //La localizacion tiene que ser reciente para poder usarla (obtenida hace menos de 60 segundos)
+        if(newLocation.horizontalAccuracy < 35.0){
+            //La localizacion tiene que ser lo suficientemente precisa para poder utilizarla (35 metros a la redonda minimo)
+            NSLog(@"latitud %+.6f, longitud %+.6f\n",
+                  newLocation.coordinate.latitude,
+                  newLocation.coordinate.longitude);
+            NSLog(@"Precision horizontal:%f", newLocation.horizontalAccuracy);
+            
+            //Se deja de actualizar la localizacion para ahorrar bateria
+            //[manager stopUpdatingLocation];
+        }
+    }
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
-
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
+    
+    if(self.locationManager == nil){
+        _locationManager=[[CLLocationManager alloc] init];
+        
+        _locationManager.delegate=self;
+        _locationManager.purpose = @"Necesitamos tu localizacion para poder usar esta aplicacion correctamente";
+        _locationManager.desiredAccuracy=kCLLocationAccuracyBest;
+        _locationManager.distanceFilter=500;
+        self.locationManager=_locationManager;
+    }
+    
+    if([CLLocationManager locationServicesEnabled]){
+        [self.locationManager startUpdatingLocation];
+    }
+    
     MasterViewController *masterViewController = [[[MasterViewController alloc] initWithNibName:@"MasterViewController" bundle:nil] autorelease];
     self.navigationController = [[[UINavigationController alloc] initWithRootViewController:masterViewController] autorelease];
     masterViewController.managedObjectContext = self.managedObjectContext;

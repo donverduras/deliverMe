@@ -9,6 +9,7 @@
 #import "vistaMapa.h"
 
 @implementation VistaMapa
+@synthesize mapView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

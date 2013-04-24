@@ -20,8 +20,10 @@
 @property (retain, nonatomic) IBOutlet UITextField *idPaquete;
 
 @property BOOL editando;
+@property BOOL entregado;
 - (IBAction)oprimioBoton:(id)sender;
 - (IBAction)oprimioMapa:(id)sender;
+- (IBAction)oprimioEntrgar:(id)sender;
 
 @property (nonatomic, retain) VistaMapa *vistaMapa;
 

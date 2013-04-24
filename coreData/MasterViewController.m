@@ -159,7 +159,8 @@
         self.detailViewController = [[[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil] autorelease];
     }
     self.selectedObject = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-    self.detailViewController.detailItem = selectedObject;    
+    self.detailViewController.detailItem = selectedObject;
+    self.detailViewController.delegado = self;
     [self.navigationController pushViewController:self.detailViewController animated:YES];
 }
 
@@ -332,6 +333,23 @@
         abort();
     }
     self.selectedObject = nil;
+}
+
+- (void)eliminarObjeto: (NSString *) idPaquete
+{
+    //NSString *idPaquete = @"1032432";
+    NSFetchRequest *fetchRequest = [[[NSFetchRequest alloc] init] autorelease];
+    NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Event" inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    NSPredicate *p=[NSPredicate predicateWithFormat:@"idPaquete == %@", @"1032432"];
+    [fetchRequest setPredicate:p];
+    
+    NSError *fetchError;
+    NSArray *fetchedProducts=[self.managedObjectContext executeFetchRequest:fetchRequest error:&fetchError];
+    for (NSManagedObject *product in fetchedProducts) {
+        [context deleteObject:product];
+    }
 }
 
 @end

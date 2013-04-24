@@ -19,6 +19,7 @@
 @synthesize nombre = _nombre;
 @synthesize fecha = _fecha;
 @synthesize idPaquete = _idPaquete;
+@synthesize entregado = _entregado;
 @synthesize editando;
 @synthesize delegado;
 
@@ -124,7 +125,7 @@
 							
 - (IBAction)oprimioBoton:(id)sender {
     if(editando){
-        [self.delegado modifyObject: self.nombre.text conFecha: [NSDate date] conID: self.idPaquete.text];
+        [self.delegado modifyObject: self.nombre.text conFecha: [NSDate date] conID: self.idPaquete.text ];
     }
     else
     {
@@ -142,6 +143,11 @@
     
     [self.vistaMapa setModalTransitionStyle:UIModalTransitionStylePartialCurl];
     [self presentViewController:_vistaMapa animated:YES completion: NULL];
+}
+
+- (IBAction)oprimioEntrgar:(id)sender {
+    self.entregado = YES;
+    [self.delegado eliminarObjeto: self.idPaquete.text];
 }
 
 - (void) quitaVista:(id)sender{

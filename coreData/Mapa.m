@@ -7,6 +7,7 @@
 //
 
 #import "Mapa.h"
+#define METERS_PER_MILE 1609.344
 
 @interface Mapa ()
 
@@ -14,6 +15,8 @@
 
 @implementation Mapa
 @synthesize mapView;
+@synthesize ubicacionPaquete;
+@synthesize ubicacionUsuario;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -29,11 +32,22 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     mapView.showsUserLocation = YES;
-    UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc]
-                                          initWithTarget:self action:@selector(handleLongPress:)];
+    UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleLongPress:)];
     lpgr.minimumPressDuration = 2.0; //user needs to press for 2 seconds
     [self.mapView addGestureRecognizer:lpgr];
     [lpgr release];
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    ubicacionUsuario = mapView.userLocation.coordinate;
+    NSLog(@"Usuario latitud:%f", ubicacionUsuario.latitude);
+    NSLog(@"Usuario longitud:%f", ubicacionUsuario.longitude);
+    
+    // 2
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(ubicacionUsuario, 0.5*METERS_PER_MILE, 0.5*METERS_PER_MILE);
+    
+    // 3
+    [mapView setRegion:viewRegion animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -53,30 +67,19 @@
 
 - (void)handleLongPress:(UIGestureRecognizer *)gestureRecognizer
 {
-    if (gestureRecognizer.state != UIGestureRecognizerStateBegan)
-        return;
-    
-    CGPoint touchPoint = [gestureRecognizer locationInView:self.mapView];
-    CLLocationCoordinate2D touchMapCoordinate = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
-    
-    MKPointAnnotation *annot = [[MKPointAnnotation alloc] init];
-    annot.coordinate = touchMapCoordinate;
-    [self.mapView addAnnotation:annot];
-    [annot release];
-    
-    CLLocationCoordinate2D usuario = mapView.userLocation.coordinate;
-    CLLocationCoordinate2D paquete = annot.coordinate;
-    int epsilon = .00000010;
-    
-    NSLog(@"Usuario latitud:%f", usuario.latitude);
-    NSLog(@"Usuario longitud:%f", usuario.longitude);
-    NSLog(@"Paquete latitud:%f", paquete.latitude);
-    NSLog(@"Paquete longitud:%f", paquete.longitude);
-    
-    if((fabs(usuario.latitude - paquete.latitude) <= epsilon && fabs(usuario.longitude - paquete.longitude) <= epsilon)){
-        NSLog(@"SI");
+    if (gestureRecognizer.state == UIGestureRecognizerStateBegan){
+        CGPoint touchPoint = [gestureRecognizer locationInView:self.mapView];
+        CLLocationCoordinate2D touchMapCoordinate = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
+        
+        MKPointAnnotation *annot = [[MKPointAnnotation alloc] init];
+        annot.coordinate = touchMapCoordinate;
+        [self.mapView addAnnotation:annot];
+        [annot release];
+        
+        ubicacionPaquete = annot.coordinate;
+        NSLog(@"Paquete latitud:%f", ubicacionPaquete.latitude);
+        NSLog(@"Paquete longitud:%f", ubicacionPaquete.longitude);
     }
-    
 }
 
 @end

@@ -159,7 +159,8 @@
         self.detailViewController = [[[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil] autorelease];
     }
     self.selectedObject = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-    self.detailViewController.detailItem = selectedObject;    
+    self.detailViewController.detailItem = selectedObject;
+    self.detailViewController.delegado = self;
     [self.navigationController pushViewController:self.detailViewController animated:YES];
 }
 

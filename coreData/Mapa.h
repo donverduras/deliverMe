@@ -14,4 +14,7 @@
 
 @property (retain, nonatomic) IBOutlet MKMapView *mapView;
 
+@property CLLocationCoordinate2D ubicacionUsuario;
+@property CLLocationCoordinate2D ubicacionPaquete;
+
 @end

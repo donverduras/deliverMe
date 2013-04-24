@@ -38,10 +38,6 @@
         //La localizacion tiene que ser reciente para poder usarla (obtenida hace menos de 60 segundos)
         if(newLocation.horizontalAccuracy < 35.0){
             //La localizacion tiene que ser lo suficientemente precisa para poder utilizarla (35 metros a la redonda minimo)
-            NSLog(@"latitud %+.6f, longitud %+.6f\n",
-                  newLocation.coordinate.latitude,
-                  newLocation.coordinate.longitude);
-            NSLog(@"Precision horizontal:%f", newLocation.horizontalAccuracy);
             ubicacionActual.latitude = newLocation.coordinate.latitude;
             ubicacionActual.longitude = newLocation.coordinate.longitude;
             

@@ -342,7 +342,7 @@
     NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Event" inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
-    NSPredicate *p=[NSPredicate predicateWithFormat:@"idPaquete == %@", @"1032432"];
+    NSPredicate *p=[NSPredicate predicateWithFormat:@"idPaquete == %@", idPaquete];
     [fetchRequest setPredicate:p];
     
     NSError *fetchError;
@@ -350,6 +350,7 @@
     for (NSManagedObject *product in fetchedProducts) {
         [context deleteObject:product];
     }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

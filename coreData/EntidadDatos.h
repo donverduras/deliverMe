@@ -7,11 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
 
 @interface EntidadDatos : NSObject
 
 @property (nonatomic, retain) NSString *nombre;
 @property (nonatomic, retain) NSString *idPaquete;
 @property (nonatomic, retain) NSDate *timeStamp;
+@property CLLocationCoordinate2D ubicacionPaquete;
 
 @end

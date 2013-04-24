@@ -22,5 +22,6 @@
 
 @property (strong, nonatomic) UINavigationController *navigationController;
 @property (strong, nonatomic) CLLocationManager *locationManager;
+@property CLLocationCoordinate2D ubicacionActual;
 
 @end

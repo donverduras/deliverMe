@@ -21,8 +21,8 @@
 		3A42E15F1715C30D0024E9AA /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A42E15D1715C30D0024E9AA /* DetailViewController.xib */; };
 		3A42E1671715C8340024E9AA /* EntidadDatos.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A42E1661715C8340024E9AA /* EntidadDatos.m */; };
 		D37EF3EA171CA90200B7198D /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D37EF3E9171CA90200B7198D /* Default-568h@2x.png */; };
-		D3BDF8AC171CC04F00930498 /* VistaMapa.m in Sources */ = {isa = PBXBuildFile; fileRef = D3BDF8AA171CC04F00930498 /* VistaMapa.m */; };
-		D3BDF8AD171CC04F00930498 /* VistaMapa.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3BDF8AB171CC04F00930498 /* VistaMapa.xib */; };
+		D3A7C55D1726EAF800184CC4 /* Mapa.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A7C55B1726EAF800184CC4 /* Mapa.m */; };
+		D3A7C55E1726EAF800184CC4 /* Mapa.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3A7C55C1726EAF800184CC4 /* Mapa.xib */; };
 		D3BDF8AF171CC4EE00930498 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3BDF8AE171CC4EE00930498 /* MapKit.framework */; };
 		D3E733A917262BEA00FA28A4 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3E733A817262BEA00FA28A4 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
@@ -49,9 +49,9 @@
 		3A42E1651715C8340024E9AA /* EntidadDatos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntidadDatos.h; sourceTree = "<group>"; };
 		3A42E1661715C8340024E9AA /* EntidadDatos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntidadDatos.m; sourceTree = "<group>"; };
 		D37EF3E9171CA90200B7198D /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		D3BDF8A9171CC04F00930498 /* VistaMapa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VistaMapa.h; sourceTree = "<group>"; };
-		D3BDF8AA171CC04F00930498 /* VistaMapa.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VistaMapa.m; sourceTree = "<group>"; };
-		D3BDF8AB171CC04F00930498 /* VistaMapa.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VistaMapa.xib; sourceTree = "<group>"; };
+		D3A7C55A1726EAF800184CC4 /* Mapa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mapa.h; sourceTree = "<group>"; };
+		D3A7C55B1726EAF800184CC4 /* Mapa.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mapa.m; sourceTree = "<group>"; };
+		D3A7C55C1726EAF800184CC4 /* Mapa.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Mapa.xib; sourceTree = "<group>"; };
 		D3BDF8AE171CC4EE00930498 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		D3E733A817262BEA00FA28A4 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -111,13 +111,13 @@
 				3A42E14F1715C30D0024E9AA /* AppDelegate.m */,
 				3A42E1541715C30D0024E9AA /* MasterViewController.h */,
 				3A42E1551715C30D0024E9AA /* MasterViewController.m */,
+				3A42E15A1715C30D0024E9AA /* MasterViewController.xib */,
 				3A42E1571715C30D0024E9AA /* DetailViewController.h */,
 				3A42E1581715C30D0024E9AA /* DetailViewController.m */,
-				D3BDF8A9171CC04F00930498 /* VistaMapa.h */,
-				D3BDF8AA171CC04F00930498 /* VistaMapa.m */,
-				D3BDF8AB171CC04F00930498 /* VistaMapa.xib */,
-				3A42E15A1715C30D0024E9AA /* MasterViewController.xib */,
 				3A42E15D1715C30D0024E9AA /* DetailViewController.xib */,
+				D3A7C55A1726EAF800184CC4 /* Mapa.h */,
+				D3A7C55B1726EAF800184CC4 /* Mapa.m */,
+				D3A7C55C1726EAF800184CC4 /* Mapa.xib */,
 				3A42E1511715C30D0024E9AA /* coreData.xcdatamodeld */,
 				3A42E1461715C30C0024E9AA /* Supporting Files */,
 				3A42E1651715C8340024E9AA /* EntidadDatos.h */,
@@ -192,7 +192,7 @@
 				3A42E15C1715C30D0024E9AA /* MasterViewController.xib in Resources */,
 				3A42E15F1715C30D0024E9AA /* DetailViewController.xib in Resources */,
 				D37EF3EA171CA90200B7198D /* Default-568h@2x.png in Resources */,
-				D3BDF8AD171CC04F00930498 /* VistaMapa.xib in Resources */,
+				D3A7C55E1726EAF800184CC4 /* Mapa.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,7 +209,7 @@
 				3A42E1561715C30D0024E9AA /* MasterViewController.m in Sources */,
 				3A42E1591715C30D0024E9AA /* DetailViewController.m in Sources */,
 				3A42E1671715C8340024E9AA /* EntidadDatos.m in Sources */,
-				D3BDF8AC171CC04F00930498 /* VistaMapa.m in Sources */,
+				D3A7C55D1726EAF800184CC4 /* Mapa.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

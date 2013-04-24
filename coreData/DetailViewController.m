@@ -22,6 +22,7 @@
 @synthesize entregado = _entregado;
 @synthesize editando;
 @synthesize delegado;
+@synthesize vistaMapa;
 
 - (void)dealloc
 {
@@ -53,12 +54,14 @@
         EntidadDatos *objeto = (EntidadDatos *) self.detailItem;
         self.nombre.text = [objeto nombre];
         self.fecha.text = [objeto.timeStamp description];
+        self.idPaquete.text = [objeto idPaquete];
         self.editando = YES;
     } 
     else
     {
         self.nombre.text = @"";
         self.fecha.text = [[NSDate date] description];
+        self.idPaquete.text = @"";
         self.editando = NO;
     }
 }
@@ -125,26 +128,31 @@
 							
 - (IBAction)oprimioBoton:(id)sender {
     if(editando){
+<<<<<<< HEAD
         [self.delegado modifyObject: self.nombre.text conFecha: [NSDate date] conID: self.idPaquete.text ];
+=======
+        [self.delegado modifyObject: self.nombre.text conFecha: [NSDate date] conID: self.idPaquete.text];
+        [self.navigationController popViewControllerAnimated:YES];
+>>>>>>> ef9b63e343d1d488cdf686ad71008813a3b2f066
     }
     else
     {
         [self.delegado insertNewObject: self.nombre.text conFecha: [NSDate date] conID: self.idPaquete.text];
+        [self.navigationController popViewControllerAnimated:YES];
         editando = YES;
     }
 }
 
 - (IBAction)oprimioMapa:(id)sender {
     if(!self.vistaMapa){
-        self.vistaMapa = [[[VistaMapa alloc] initWithNibName:@"VistaMapa" bundle:nil] autorelease];
+        self.vistaMapa = [[[Mapa alloc] initWithNibName:@"Mapa" bundle:nil] autorelease];
     }
     
-    [self.vistaMapa setDelegado:self];
-    
     [self.vistaMapa setModalTransitionStyle:UIModalTransitionStylePartialCurl];
-    [self presentViewController:_vistaMapa animated:YES completion: NULL];
+    [self.navigationController pushViewController:self.vistaMapa animated:YES];
 }
 
+<<<<<<< HEAD
 - (IBAction)oprimioEntrgar:(id)sender {
     self.entregado = YES;
     [self.delegado eliminarObjeto: self.idPaquete.text];
@@ -153,4 +161,6 @@
 - (void) quitaVista:(id)sender{
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
+=======
+>>>>>>> ef9b63e343d1d488cdf686ad71008813a3b2f066
 @end

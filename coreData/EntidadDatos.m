@@ -13,5 +13,6 @@
 @synthesize nombre;
 @synthesize idPaquete;
 @synthesize timeStamp;
+@synthesize ubicacionPaquete;
 
 @end

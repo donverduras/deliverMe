@@ -76,12 +76,12 @@
 		3A42E12E1715C30C0024E9AA = {
 			isa = PBXGroup;
 			children = (
-				D3E733A817262BEA00FA28A4 /* CoreLocation.framework */,
-				D3BDF8AE171CC4EE00930498 /* MapKit.framework */,
-				D37EF3E9171CA90200B7198D /* Default-568h@2x.png */,
 				3A42E1451715C30C0024E9AA /* proyectoFinal */,
 				3A42E13C1715C30C0024E9AA /* Frameworks */,
 				3A42E13A1715C30C0024E9AA /* Products */,
+				D3E733A817262BEA00FA28A4 /* CoreLocation.framework */,
+				D3BDF8AE171CC4EE00930498 /* MapKit.framework */,
+				D37EF3E9171CA90200B7198D /* Default-568h@2x.png */,
 			);
 			sourceTree = "<group>";
 		};

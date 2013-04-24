@@ -128,12 +128,9 @@
 							
 - (IBAction)oprimioBoton:(id)sender {
     if(editando){
-<<<<<<< HEAD
         [self.delegado modifyObject: self.nombre.text conFecha: [NSDate date] conID: self.idPaquete.text ];
-=======
         [self.delegado modifyObject: self.nombre.text conFecha: [NSDate date] conID: self.idPaquete.text];
         [self.navigationController popViewControllerAnimated:YES];
->>>>>>> ef9b63e343d1d488cdf686ad71008813a3b2f066
     }
     else
     {
@@ -152,7 +149,6 @@
     [self.navigationController pushViewController:self.vistaMapa animated:YES];
 }
 
-<<<<<<< HEAD
 - (IBAction)oprimioEntrgar:(id)sender {
     self.entregado = YES;
     [self.delegado eliminarObjeto: self.idPaquete.text];
@@ -161,6 +157,4 @@
 - (void) quitaVista:(id)sender{
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
-=======
->>>>>>> ef9b63e343d1d488cdf686ad71008813a3b2f066
 @end

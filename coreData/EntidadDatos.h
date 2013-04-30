@@ -14,6 +14,8 @@
 @property (nonatomic, retain) NSString *nombre;
 @property (nonatomic, retain) NSString *idPaquete;
 @property (nonatomic, retain) NSDate *timeStamp;
+@property (nonatomic, retain) NSNumber *latitud;
+@property (nonatomic, retain) NSNumber *longitud;
 @property CLLocationCoordinate2D ubicacionPaquete;
 
 @end

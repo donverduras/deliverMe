@@ -14,5 +14,7 @@
 @synthesize idPaquete;
 @synthesize timeStamp;
 @synthesize ubicacionPaquete;
+@synthesize latitud;
+@synthesize longitud;
 
 @end

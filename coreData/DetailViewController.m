@@ -20,6 +20,8 @@
 @synthesize fecha = _fecha;
 @synthesize idPaquete = _idPaquete;
 @synthesize entregado = _entregado;
+@synthesize latitud = _latitud;
+@synthesize longitud = _longitud;
 @synthesize editando;
 @synthesize delegado;
 @synthesize vistaMapa;
@@ -31,6 +33,8 @@
     [_nombre release];
     [_fecha release];
     [_idPaquete release];
+    [_latitud release];
+    [_longitud release];
     [super dealloc];
 }
 
@@ -56,6 +60,8 @@
         self.nombre.text = [objeto nombre];
         self.fecha.text = [objeto.timeStamp description];
         self.idPaquete.text = [objeto idPaquete];
+        self.latitud.text = [[objeto latitud] stringValue];
+        self.longitud.text = [[objeto longitud] stringValue];
         self.editando = YES;
     } 
     else
@@ -63,6 +69,8 @@
         self.nombre.text = @"";
         self.fecha.text = [[NSDate date] description];
         self.idPaquete.text = @"";
+        self.longitud.text = @"";
+        self.latitud.text = @"";
         self.editando = NO;
     }
 }
@@ -79,7 +87,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    CGSize scrollableSize = CGSizeMake(320, 250);
+    CGSize scrollableSize = CGSizeMake(320, 300);
     [scroller setScrollEnabled:YES];
     [scroller setContentSize: scrollableSize];
     [scroller setShowsVerticalScrollIndicator:YES];
@@ -93,6 +101,8 @@
     [self setNombre:nil];
     [self setFecha:nil];
     [self setIdPaquete:nil];
+    [self setLatitud:nil];
+    [self setLongitud:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -101,6 +111,14 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    if(self.vistaMapa.ubicacionPaquete.latitude != 0.0){
+        self.latitud.text = [NSString stringWithFormat:@"%f", self.vistaMapa.ubicacionPaquete.latitude];
+        self.longitud.text = [NSString stringWithFormat:@"%f", self.vistaMapa.ubicacionPaquete.longitude];
+    }
+    else{
+        self.longitud.text = @"Hola";
+        self.latitud.text = @"Hola";
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -135,13 +153,12 @@
 							
 - (IBAction)oprimioBoton:(id)sender {
     if(editando){
-        [self.delegado modifyObject: self.nombre.text conFecha: [NSDate date] conID: self.idPaquete.text ];
-        [self.delegado modifyObject: self.nombre.text conFecha: [NSDate date] conID: self.idPaquete.text];
+        [self.delegado modifyObject: self.nombre.text conFecha: [NSDate date] conID: self.idPaquete.text conLatitud: [self.latitud.text doubleValue] conLongitud: [self.longitud.text doubleValue]];
         [self.navigationController popViewControllerAnimated:YES];
     }
     else
     {
-        [self.delegado insertNewObject: self.nombre.text conFecha: [NSDate date] conID: self.idPaquete.text];
+        [self.delegado insertNewObject: self.nombre.text conFecha: [NSDate date] conID: self.idPaquete.text conLatitud: [self.latitud.text doubleValue] conLongitud: [self.longitud.text doubleValue]];
         [self.navigationController popViewControllerAnimated:YES];
         editando = YES;
     }

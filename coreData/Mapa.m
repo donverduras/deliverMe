@@ -42,11 +42,8 @@
     ubicacionUsuario = mapView.userLocation.coordinate;
     NSLog(@"Usuario latitud:%f", ubicacionUsuario.latitude);
     NSLog(@"Usuario longitud:%f", ubicacionUsuario.longitude);
-    
-    // 2
+
     MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(ubicacionUsuario, 0.5*METERS_PER_MILE, 0.5*METERS_PER_MILE);
-    
-    // 3
     [mapView setRegion:viewRegion animated:YES];
 }
 

@@ -285,7 +285,7 @@
     cell.detailTextLabel.text = [managedObject valueForKey:@"idPaquete"];
 }
 
-- (void)insertNewObject: (NSString *) nombre conFecha: (NSDate *) fecha conID: (NSString *) idPaquete
+- (void)insertNewObject: (NSString *) nombre conFecha: (NSDate *) fecha conID: (NSString *) idPaquete conLatitud: (double) latitud conLongitud: (double) longitud
 {
     // Create a new instance of the entity managed by the fetched results controller.
     NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
@@ -297,6 +297,8 @@
     [newManagedObject setValue:fecha forKey:@"timeStamp"];
     [newManagedObject setValue:nombre forKey:@"nombre"];
     [newManagedObject setValue:idPaquete forKey:@"idPaquete"];
+    [newManagedObject setValue:[NSNumber numberWithDouble: latitud] forKey:@"latitud"];
+    [newManagedObject setValue:[NSNumber numberWithDouble: longitud] forKey:@"longitud"];
     
     // Save the context.
     NSError *error = nil;
@@ -311,7 +313,7 @@
     }
 }
 
-- (void)modifyObject: (NSString *) nombre conFecha: (NSDate *) fecha conID: (NSString *) idPaquete
+- (void)modifyObject: (NSString *) nombre conFecha: (NSDate *) fecha conID: (NSString *) idPaquete conLatitud: (double) latitud conLongitud: (double) longitud
 {
     // Create a new instance of the entity managed by the fetched results controller.
     NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
@@ -320,6 +322,8 @@
     [self.selectedObject setValue:fecha forKey:@"timeStamp"];
     [self.selectedObject setValue:nombre forKey:@"nombre"];
     [self.selectedObject setValue:idPaquete forKey:@"idPaquete"];
+    [self.selectedObject setValue:[NSNumber numberWithDouble: latitud] forKey:@"latitud"];
+    [self.selectedObject setValue:[NSNumber numberWithDouble: longitud] forKey:@"longitud"];
     
     // Save the context.
     NSError *error = nil;

@@ -19,6 +19,8 @@
 @property (retain, nonatomic) IBOutlet UITextField *fecha;
 @property (retain, nonatomic) IBOutlet UITextField *idPaquete;
 @property (retain, nonatomic) IBOutlet UIScrollView *scroller;
+@property (retain, nonatomic) IBOutlet UITextField *latitud;
+@property (retain, nonatomic) IBOutlet UITextField *longitud;
 
 @property BOOL editando;
 @property BOOL entregado;

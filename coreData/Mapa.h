@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import "AppDelegate.h"
-#import "DetailViewController.h"
 
 @interface Mapa : UIViewController
 

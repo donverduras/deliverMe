@@ -117,6 +117,19 @@
     return cell;
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+    return [sectionInfo name];
+}
+
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
+    return [self.fetchedResultsController sectionIndexTitles];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
+    return [self.fetchedResultsController sectionForSectionIndexTitle:title atIndex:index];
+}
+
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -193,14 +206,14 @@
     [fetchRequest setFetchBatchSize:20];
     
     // Edit the sort key as appropriate.
-    NSSortDescriptor *sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"timeStamp" ascending:NO] autorelease];
+    NSSortDescriptor *sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"entregado" ascending:NO] autorelease];
     NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
     
     [fetchRequest setSortDescriptors:sortDescriptors];
     
     // Edit the section name key path and cache name if appropriate.
     // nil for section name key path means "no sections".
-    NSFetchedResultsController *aFetchedResultsController = [[[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"Master"] autorelease];
+    NSFetchedResultsController *aFetchedResultsController = [[[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:@"entregado" cacheName:@"Master"] autorelease];
     aFetchedResultsController.delegate = self;
     self.fetchedResultsController = aFetchedResultsController;
     
@@ -285,7 +298,7 @@
     cell.detailTextLabel.text = [managedObject valueForKey:@"idPaquete"];
 }
 
-- (void)insertNewObject: (NSString *) nombre conFecha: (NSDate *) fecha conID: (NSString *) idPaquete conLatitud: (double) latitud conLongitud: (double) longitud
+- (void)insertNewObject: (NSString *) nombre conFecha: (NSDate *) fecha conID: (NSString *) idPaquete conLatitud: (double) latitud conLongitud: (double) longitud entregado:(NSString *)entregado
 {
     // Create a new instance of the entity managed by the fetched results controller.
     NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
@@ -299,6 +312,7 @@
     [newManagedObject setValue:idPaquete forKey:@"idPaquete"];
     [newManagedObject setValue:[NSNumber numberWithDouble: latitud] forKey:@"latitud"];
     [newManagedObject setValue:[NSNumber numberWithDouble: longitud] forKey:@"longitud"];
+    [newManagedObject setValue: entregado forKey:@"entregado"];
     
     // Save the context.
     NSError *error = nil;
@@ -313,7 +327,7 @@
     }
 }
 
-- (void)modifyObject: (NSString *) nombre conFecha: (NSDate *) fecha conID: (NSString *) idPaquete conLatitud: (double) latitud conLongitud: (double) longitud
+- (void)modifyObject: (NSString *) nombre conFecha: (NSDate *) fecha conID: (NSString *) idPaquete conLatitud: (double) latitud conLongitud: (double) longitud entregado:(NSString *)entregado
 {
     // Create a new instance of the entity managed by the fetched results controller.
     NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
@@ -324,6 +338,7 @@
     [self.selectedObject setValue:idPaquete forKey:@"idPaquete"];
     [self.selectedObject setValue:[NSNumber numberWithDouble: latitud] forKey:@"latitud"];
     [self.selectedObject setValue:[NSNumber numberWithDouble: longitud] forKey:@"longitud"];
+    [self.selectedObject setValue: entregado forKey:@"entregado"];
     
     // Save the context.
     NSError *error = nil;
@@ -339,9 +354,8 @@
     self.selectedObject = nil;
 }
 
-- (void)eliminarObjeto: (NSString *) idPaquete
+/*- (void)eliminarObjeto: (NSString *) idPaquete
 {
-    //NSString *idPaquete = @"1032432";
     NSFetchRequest *fetchRequest = [[[NSFetchRequest alloc] init] autorelease];
     NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Event" inManagedObjectContext:self.managedObjectContext];
@@ -358,14 +372,9 @@
     // Save the context.
     NSError *error = nil;
     if (![context save:&error]) {
-        /*
-         Replace this implementation with code to handle the error appropriately.
-         
-         abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-         */
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
-}
+}*/
 
 @end

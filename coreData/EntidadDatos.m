@@ -16,5 +16,6 @@
 @synthesize ubicacionPaquete;
 @synthesize latitud;
 @synthesize longitud;
+@synthesize entregado;
 
 @end

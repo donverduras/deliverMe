@@ -17,5 +17,6 @@
 @property (nonatomic, retain) NSNumber *latitud;
 @property (nonatomic, retain) NSNumber *longitud;
 @property CLLocationCoordinate2D ubicacionPaquete;
+@property (nonatomic, retain) NSString *entregado;
 
 @end

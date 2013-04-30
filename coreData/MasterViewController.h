@@ -22,9 +22,9 @@
 @property (nonatomic, retain) NSManagedObject *selectedObject;
 
 - (void) agregaObjeto;
-- (void)modifyObject: (NSString *) nombre conFecha: (NSDate *) fecha conID: (NSString *) idPaquete conLatitud: (double) latitud conLongitud: (double) longitud;
-- (void)insertNewObject: (NSString *) nombre conFecha: (NSDate *) fecha conID: (NSString *) idPaquete conLatitud: (double) latitud conLongitud: (double) longitud;
-- (void)eliminarObjeto: (NSString *) idPaquete;
+- (void)modifyObject: (NSString *) nombre conFecha: (NSDate *) fecha conID: (NSString *) idPaquete conLatitud: (double) latitud conLongitud: (double) longitud entregado: (NSString *) entregado;
+- (void)insertNewObject: (NSString *) nombre conFecha: (NSDate *) fecha conID: (NSString *) idPaquete conLatitud: (double) latitud conLongitud: (double) longitud entregado: (NSString *) entregado;
+//- (void)eliminarObjeto: (NSString *) idPaquete;
 
 
 

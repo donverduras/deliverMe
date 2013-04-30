@@ -23,7 +23,7 @@
 @property (retain, nonatomic) IBOutlet UITextField *longitud;
 
 @property BOOL editando;
-@property BOOL entregado;
+@property (nonatomic, retain) NSString *entregado;
 - (IBAction)oprimioBoton:(id)sender;
 - (IBAction)oprimioMapa:(id)sender;
 - (IBAction)oprimioEntrgar:(id)sender;

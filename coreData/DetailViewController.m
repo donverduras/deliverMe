@@ -153,12 +153,12 @@
 							
 - (IBAction)oprimioBoton:(id)sender {
     if(editando){
-        [self.delegado modifyObject: self.nombre.text conFecha: [NSDate date] conID: self.idPaquete.text conLatitud: [self.latitud.text doubleValue] conLongitud: [self.longitud.text doubleValue]];
+        [self.delegado modifyObject: self.nombre.text conFecha:[NSDate date] conID: self.idPaquete.text conLatitud: [self.latitud.text doubleValue] conLongitud: [self.longitud.text doubleValue] entregado:@"Pendiente"];
         [self.navigationController popViewControllerAnimated:YES];
     }
     else
     {
-        [self.delegado insertNewObject: self.nombre.text conFecha: [NSDate date] conID: self.idPaquete.text conLatitud: [self.latitud.text doubleValue] conLongitud: [self.longitud.text doubleValue]];
+        [self.delegado insertNewObject: self.nombre.text conFecha: [NSDate date] conID: self.idPaquete.text conLatitud: [self.latitud.text doubleValue] conLongitud: [self.longitud.text doubleValue] entregado:@"Pendiente"];
         [self.navigationController popViewControllerAnimated:YES];
         editando = YES;
     }
@@ -174,8 +174,12 @@
 }
 
 - (IBAction)oprimioEntrgar:(id)sender {
-    self.entregado = YES;
-    [self.delegado eliminarObjeto: self.idPaquete.text];
+    self.entregado = @"Entregado";
+    if(editando){
+        [self.delegado modifyObject: self.nombre.text conFecha: [NSDate date] conID: self.idPaquete.text conLatitud: [self.latitud.text doubleValue] conLongitud: [self.longitud.text doubleValue] entregado: @"Entregado"];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    //[self.delegado eliminarObjeto: self.idPaquete.text];
 }
 
 - (void) quitaVista:(id)sender{

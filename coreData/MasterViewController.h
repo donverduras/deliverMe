@@ -26,4 +26,6 @@
 - (void)insertNewObject: (NSString *) nombre conFecha: (NSDate *) fecha conID: (NSString *) idPaquete;
 - (void)eliminarObjeto: (NSString *) idPaquete;
 
+
+
 @end

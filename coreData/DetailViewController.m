@@ -23,6 +23,7 @@
 @synthesize editando;
 @synthesize delegado;
 @synthesize vistaMapa;
+@synthesize scroller;
 
 - (void)dealloc
 {
@@ -78,6 +79,12 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    CGSize scrollableSize = CGSizeMake(320, 250);
+    [scroller setScrollEnabled:YES];
+    [scroller setContentSize: scrollableSize];
+    [scroller setShowsVerticalScrollIndicator:YES];
+    [scroller setContentOffset:CGPointMake(0, 0) animated: YES];
+    scroller.hidden = NO;
     [self configureView];
 }
 

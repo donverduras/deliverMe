@@ -68,6 +68,11 @@
 - (void)handleLongPress:(UIGestureRecognizer *)gestureRecognizer
 {
     if (gestureRecognizer.state == UIGestureRecognizerStateBegan){
+
+        NSMutableArray * annotationsToRemove = [mapView.annotations mutableCopy];
+        [annotationsToRemove removeObject:mapView.userLocation];
+        [mapView removeAnnotations:annotationsToRemove];
+        
         CGPoint touchPoint = [gestureRecognizer locationInView:self.mapView];
         CLLocationCoordinate2D touchMapCoordinate = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
         

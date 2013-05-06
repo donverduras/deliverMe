@@ -47,6 +47,10 @@
     MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(ubicacionUsuario, 0.5*METERS_PER_MILE, 0.5*METERS_PER_MILE);
     [mapView setRegion:viewRegion animated:YES];
     
+    NSMutableArray * annotationsToRemove = [mapView.annotations mutableCopy];
+    [annotationsToRemove removeObject:mapView.userLocation];
+    [mapView removeAnnotations:annotationsToRemove];
+    
     if(ubicacionGuardada.latitude != 0.0){
         MKPointAnnotation *annot = [[MKPointAnnotation alloc] init];
         annot.coordinate = ubicacionGuardada;

@@ -191,17 +191,14 @@
     double longitudPaquete = [self.longitud.text doubleValue];
     double latitudPaquete = [self.latitud.text doubleValue];
     
-    NSLog(@"Latitud usuario: %f", latitudUsuario);
-    NSLog(@"Longitud usuario: %f", longitudUsuario);
-    NSLog(@"Latitud paquete: %f", latitudPaquete);
-    NSLog(@"Longitud paquete: %f", longitudPaquete);
-    
     if(fabs(latitudUsuario - latitudPaquete) <= epsilon && fabs(longitudUsuario - longitudPaquete) <= epsilon){
         [self.delegado modifyObject: self.nombre.text conFecha: [NSDate date] conID: self.idPaquete.text conLatitud: [self.latitud.text doubleValue] conLongitud: [self.longitud.text doubleValue] entregado: @"Entregado"];
         [self.navigationController popViewControllerAnimated:YES];
     }
     else{
-        NSLog(@"ADIOS =(");
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Estas muy lejos de la ubicacion de entrega del paquete." message:@"Acercate mas a la ubicacion señalada" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok",nil];
+        [alert show];
+        [alert release];
     }
 }
 

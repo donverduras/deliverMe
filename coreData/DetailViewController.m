@@ -205,4 +205,8 @@
 - (void) quitaVista:(id)sender{
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
+
+- (IBAction)quitaTecla:(id)sender {
+     [self.nombre resignFirstResponder];
+}
 @end

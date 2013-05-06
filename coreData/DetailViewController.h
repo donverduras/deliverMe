@@ -28,6 +28,7 @@
 - (IBAction)oprimioBoton:(id)sender;
 - (IBAction)oprimioMapa:(id)sender;
 - (IBAction)oprimioEntrgar:(id)sender;
+- (IBAction)quitaTecla:(id)sender;
 
 @property (nonatomic, retain) Mapa *vistaMapa;
 

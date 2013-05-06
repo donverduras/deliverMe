@@ -40,17 +40,21 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated{
+    //Se obtiene la ubicacion del usuario y se agrega al mapa
     ubicacionUsuario = mapView.userLocation.coordinate;
     NSLog(@"Usuario latitud:%f", ubicacionUsuario.latitude);
     NSLog(@"Usuario longitud:%f", ubicacionUsuario.longitude);
-
+    
+    //Se realiza un zoom para desplegar solo una pequeña area en donde se ubica actualmente el usuario
     MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(ubicacionUsuario, 0.5*METERS_PER_MILE, 0.5*METERS_PER_MILE);
     [mapView setRegion:viewRegion animated:YES];
     
+    //Se remueven las anotaciones anteriores agregadas por otros paquetes
     NSMutableArray * annotationsToRemove = [mapView.annotations mutableCopy];
     [annotationsToRemove removeObject:mapView.userLocation];
     [mapView removeAnnotations:annotationsToRemove];
     
+    //Si el paquete actualmente ya tiene una ubicacion guardada se agrega al mapa para desplegarse
     if(ubicacionGuardada.latitude != 0.0){
         MKPointAnnotation *annot = [[MKPointAnnotation alloc] init];
         annot.coordinate = ubicacionGuardada;
@@ -74,17 +78,21 @@
     [super viewDidUnload];
 }
 
+
+//Este metodo reconoce cuando se mantiene presionado el mapa para establecer una nueva ubicacion de un paquete
 - (void)handleLongPress:(UIGestureRecognizer *)gestureRecognizer
 {
     if (gestureRecognizer.state == UIGestureRecognizerStateBegan){
-
+        //Primero se eliminan las anotaciones anteriores en caso de que existan
         NSMutableArray * annotationsToRemove = [mapView.annotations mutableCopy];
         [annotationsToRemove removeObject:mapView.userLocation];
         [mapView removeAnnotations:annotationsToRemove];
         
+        //Se obtienen las coordenadas que se presionaron
         CGPoint touchPoint = [gestureRecognizer locationInView:self.mapView];
         CLLocationCoordinate2D touchMapCoordinate = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
         
+        //Se agrega una anotacion en el mapa con las coordenedas obtenidas
         MKPointAnnotation *annot = [[MKPointAnnotation alloc] init];
         annot.coordinate = touchMapCoordinate;
         [self.mapView addAnnotation:annot];

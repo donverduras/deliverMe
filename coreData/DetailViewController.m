@@ -85,7 +85,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+	//Configuracion necesaria para cargar el scrollview correctamente
     CGSize scrollableSize = CGSizeMake(320, 300);
     [scroller setScrollEnabled:YES];
     [scroller setContentSize: scrollableSize];
@@ -110,6 +110,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    //Cuando se agrega una anotacion en el mapa se cambian los datos de los campos de texto de longitud y latitud
     if(self.vistaMapa.ubicacionPaquete.latitude != 0.0){
         self.latitud.text = [NSString stringWithFormat:@"%f", self.vistaMapa.ubicacionPaquete.latitude];
         self.longitud.text = [NSString stringWithFormat:@"%f", self.vistaMapa.ubicacionPaquete.longitude];
@@ -163,6 +164,7 @@
     }
 }
 
+//Metodo que reconoce cuando se presiona el boton de mapa y manda llamar a la vista y manda los datos necesarios
 - (IBAction)oprimioMapa:(id)sender {
     if(!self.vistaMapa){
         self.vistaMapa = [[[Mapa alloc] initWithNibName:@"Mapa" bundle:nil] autorelease];
@@ -179,18 +181,21 @@
     }
 }
 
+//Metodo para marcar el paquete como entregado revisando que la ubicacion actual y la del paquete esten dentro de los parametros aceptados
 - (IBAction)oprimioEntrgar:(id)sender {
     self.entregado = @"Entregado";
     
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     CLLocationCoordinate2D ubicacionActual = appDelegate.ubicacionActual;
     
+    //Se declaran las latitudes y longitudes tanto del usuario como del paquete, ademas se declara el grado de tolerancia para marcar un paquete como entregado
     double epsilon = 0.01;
     double latitudUsuario = ubicacionActual.latitude;
     double longitudUsuario = ubicacionActual.longitude;
     double longitudPaquete = [self.longitud.text doubleValue];
     double latitudPaquete = [self.latitud.text doubleValue];
     
+    //Se realizan las operaciones necesarias para ver si se encuentra dentro del rango permitido, si se cumple se marca como entregado y si no se manda una alerta para avisar al usuario
     if(fabs(latitudUsuario - latitudPaquete) <= epsilon && fabs(longitudUsuario - longitudPaquete) <= epsilon){
         [self.delegado modifyObject: self.nombre.text conFecha: [NSDate date] conID: self.idPaquete.text conLatitud: [self.latitud.text doubleValue] conLongitud: [self.longitud.text doubleValue] entregado: @"Entregado"];
         [self.navigationController popViewControllerAnimated:YES];

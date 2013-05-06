@@ -42,13 +42,12 @@
 
 - (void)setDetailItem:(id)newDetailItem
 {
-    if (_detailItem != newDetailItem) {
+    //if (_detailItem != newDetailItem) {
         [_detailItem release]; 
         _detailItem = [newDetailItem retain]; 
 
         // Update the view.
         [self configureView];
-    }
 }
 
 - (void)configureView
@@ -114,10 +113,10 @@
     if(self.vistaMapa.ubicacionPaquete.latitude != 0.0){
         self.latitud.text = [NSString stringWithFormat:@"%f", self.vistaMapa.ubicacionPaquete.latitude];
         self.longitud.text = [NSString stringWithFormat:@"%f", self.vistaMapa.ubicacionPaquete.longitude];
-    }
-    else{
-        self.longitud.text = @"Hola";
-        self.latitud.text = @"Hola";
+        CLLocationCoordinate2D temp = self.vistaMapa.ubicacionPaquete;
+        temp.latitude = 0.0;
+        temp.longitude = 0.0;
+        self.vistaMapa.ubicacionPaquete = temp;
     }
 }
 
@@ -146,11 +145,11 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = NSLocalizedString(@"Detail", @"Detail");
+        self.title = NSLocalizedString(@"Paquete", @"Paquete");
     }
     return self;
 }
-							
+
 - (IBAction)oprimioBoton:(id)sender {
     if(editando){
         [self.delegado modifyObject: self.nombre.text conFecha:[NSDate date] conID: self.idPaquete.text conLatitud: [self.latitud.text doubleValue] conLongitud: [self.longitud.text doubleValue] entregado:@"Pendiente"];
@@ -171,15 +170,39 @@
     
     [self.vistaMapa setModalTransitionStyle:UIModalTransitionStylePartialCurl];
     [self.navigationController pushViewController:self.vistaMapa animated:YES];
+    
+    if(self.latitud.text != NULL){
+        CLLocationCoordinate2D temp;
+        temp.latitude = [self.latitud.text doubleValue];
+        temp.longitude = [self.longitud.text doubleValue];
+        vistaMapa.ubicacionGuardada = temp;
+    }
 }
 
 - (IBAction)oprimioEntrgar:(id)sender {
     self.entregado = @"Entregado";
-    if(editando){
+    
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    CLLocationCoordinate2D ubicacionActual = appDelegate.ubicacionActual;
+    
+    double epsilon = 0.01;
+    double latitudUsuario = ubicacionActual.latitude;
+    double longitudUsuario = ubicacionActual.longitude;
+    double longitudPaquete = [self.longitud.text doubleValue];
+    double latitudPaquete = [self.latitud.text doubleValue];
+    
+    NSLog(@"Latitud usuario: %f", latitudUsuario);
+    NSLog(@"Longitud usuario: %f", longitudUsuario);
+    NSLog(@"Latitud paquete: %f", latitudPaquete);
+    NSLog(@"Longitud paquete: %f", longitudPaquete);
+    
+    if(fabs(latitudUsuario - latitudPaquete) <= epsilon && fabs(longitudUsuario - longitudPaquete) <= epsilon){
         [self.delegado modifyObject: self.nombre.text conFecha: [NSDate date] conID: self.idPaquete.text conLatitud: [self.latitud.text doubleValue] conLongitud: [self.longitud.text doubleValue] entregado: @"Entregado"];
         [self.navigationController popViewControllerAnimated:YES];
     }
-    //[self.delegado eliminarObjeto: self.idPaquete.text];
+    else{
+        NSLog(@"ADIOS =(");
+    }
 }
 
 - (void) quitaVista:(id)sender{

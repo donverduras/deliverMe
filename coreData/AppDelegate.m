@@ -40,7 +40,6 @@
             //La localizacion tiene que ser lo suficientemente precisa para poder utilizarla (35 metros a la redonda minimo)
             ubicacionActual.latitude = newLocation.coordinate.latitude;
             ubicacionActual.longitude = newLocation.coordinate.longitude;
-            
             //Se deja de actualizar la localizacion para ahorrar bateria
             //[manager stopUpdatingLocation];
         }

@@ -16,5 +16,6 @@
 
 @property CLLocationCoordinate2D ubicacionUsuario;
 @property CLLocationCoordinate2D ubicacionPaquete;
+@property CLLocationCoordinate2D ubicacionGuardada;
 
 @end

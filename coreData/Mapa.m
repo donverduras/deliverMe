@@ -17,6 +17,7 @@
 @synthesize mapView;
 @synthesize ubicacionPaquete;
 @synthesize ubicacionUsuario;
+@synthesize ubicacionGuardada;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -45,6 +46,13 @@
 
     MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(ubicacionUsuario, 0.5*METERS_PER_MILE, 0.5*METERS_PER_MILE);
     [mapView setRegion:viewRegion animated:YES];
+    
+    if(ubicacionGuardada.latitude != 0.0){
+        MKPointAnnotation *annot = [[MKPointAnnotation alloc] init];
+        annot.coordinate = ubicacionGuardada;
+        [self.mapView addAnnotation:annot];
+        [annot release];
+    }
 }
 
 - (void)didReceiveMemoryWarning

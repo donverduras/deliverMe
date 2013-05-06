@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MasterViewController.h"
 #import "Mapa.h"
+#import "AppDelegate.h"
 
 @interface DetailViewController : UIViewController
 

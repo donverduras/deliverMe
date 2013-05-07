@@ -151,6 +151,7 @@
     return self;
 }
 
+//Metodo que se encarga de mandar llamar el metodo para guardar los datos del detail view
 - (IBAction)oprimioBoton:(id)sender {
     if(editando){
         [self.delegado modifyObject: self.nombre.text conFecha:[NSDate date] conID: self.idPaquete.text conLatitud: [self.latitud.text doubleValue] conLongitud: [self.longitud.text doubleValue] entregado:@"Pendiente"];
@@ -207,10 +208,13 @@
     }
 }
 
+//Metodo que se encarga de quitar la vista del mapa 
 - (void) quitaVista:(id)sender{
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
+
+//Metodo que se encarga de quitar el teclado cuando se le da click al boton de return 
 - (IBAction)quitaTecla:(id)sender {
      [self.nombre resignFirstResponder];
 }

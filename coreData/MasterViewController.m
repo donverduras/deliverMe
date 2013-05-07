@@ -117,28 +117,24 @@
     return cell;
 }
 
+//Este metodo es el encargado de escribir el nombre del header de las secciones del tableview que se encuentran en la entidad
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
     return [sectionInfo name];
 }
 
+
+//Pide al data source los titulos de las secciones del table view
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
     return [self.fetchedResultsController sectionIndexTitles];
 }
 
+//Pide al data source el index de la seccion teniendo el index y el titulo de la seccion
 - (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
     return [self.fetchedResultsController sectionForSectionIndexTitle:title atIndex:index];
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
+//Pide al data source para hacer commit de la insecion o eliminacion de una fila en especifico en el receiver
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
@@ -160,12 +156,14 @@
     }   
 }
 
+//Pregunta al data source si una fila puede ser movida a otra locacion en el table view
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // The table view should not be re-orderable.
     return NO;
 }
 
+//Le dice al delegado que una fila en especifico ha sido seleccionada
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (!self.detailViewController) {
@@ -177,6 +175,7 @@
     [self.navigationController pushViewController:self.detailViewController animated:YES];
 }
 
+//Este metodo permite agregar un nuevo objeto al table view
 - (void) agregaObjeto
 {
     if (!self.detailViewController) {
@@ -189,6 +188,7 @@
 
 #pragma mark - Fetched results controller
 
+//Metodo encargado del manejo del fetchResultController
 - (NSFetchedResultsController *)fetchedResultsController
 {
     if (__fetchedResultsController != nil) {
@@ -231,11 +231,13 @@
     return __fetchedResultsController;
 }    
 
+//Notifica al receiver que el fetch results controller esta a punto de empezar a procesar uno o mas cambios
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
     [self.tableView beginUpdates];
 }
 
+//Notifica al receiver que se agrego o elimino una seccion
 - (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
            atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
 {
@@ -250,6 +252,7 @@
     }
 }
 
+//Notifica al receiver que un objeto fectch ha sido cambiado 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
        atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
       newIndexPath:(NSIndexPath *)newIndexPath
@@ -276,6 +279,7 @@
     }
 }
 
+//Notifica al receiver que un RFC ha completado de procesar uno o mas cambios 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     [self.tableView endUpdates];
@@ -291,6 +295,8 @@
 }
  */
 
+
+//Metodo que configura las celdas del table view
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     NSManagedObject *managedObject = [self.fetchedResultsController objectAtIndexPath:indexPath];
@@ -298,6 +304,7 @@
     cell.detailTextLabel.text = [managedObject valueForKey:@"idPaquete"];
 }
 
+//Metodo que agrega nuevos objetos a la entidad de datos en los campos correspondientes
 - (void)insertNewObject: (NSString *) nombre conFecha: (NSDate *) fecha conID: (NSString *) idPaquete conLatitud: (double) latitud conLongitud: (double) longitud entregado:(NSString *)entregado
 {
     // Create a new instance of the entity managed by the fetched results controller.
@@ -327,6 +334,7 @@
     }
 }
 
+//Metodo que se encarga de modificar los objetos que ya se encuentran en la entidad de datos 
 - (void)modifyObject: (NSString *) nombre conFecha: (NSDate *) fecha conID: (NSString *) idPaquete conLatitud: (double) latitud conLongitud: (double) longitud entregado:(NSString *)entregado
 {
     // Create a new instance of the entity managed by the fetched results controller.
